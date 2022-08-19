@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-end">
         <button class="btn btn-success" routerLink="/user/createUser">Create New User</button>
     </div>
-    <table class="table mt-5">
+    <table class="table mt-5" *ngIf="userData.length">
         <thead>
           <tr>
             <th scope="col">Firstname</th>
@@ -29,5 +29,6 @@
           </tr>
         </tbody>
       </table>
+    <div  *ngIf="userData.length === 0"><h4>Record not found</h4></div>
 </div>
 <app-toast *ngIf="toastObj !==null" [toastObj]="toastObj"></app-toast>
