@@ -12,6 +12,9 @@ export class CreateUpdateUserComponent implements OnInit {
   userForm! : FormGroup;
   userInfo!: any;
   toastObj: any = null;
+  selectedFiles: any;
+  isValidImg!: boolean;
+  profilePicture: any;
   constructor(private userService : UserService,
     private activateRoute: ActivatedRoute,
     private formBuilder : FormBuilder,
@@ -23,11 +26,18 @@ export class CreateUpdateUserComponent implements OnInit {
   }
 
   getUserData(){
-    this.userService.$userData.subscribe((response)=>{
-      this.userInfo = response;
+    this.activateRoute.paramMap.subscribe((user : any)=>{
+      console.log("userId === ",user.params);
+      this.userInfo = user.params;
       if(this.userInfo !== null)
       this.editForm();
     })
+
+    // this.userService.$userData.subscribe((response)=>{
+    //   this.userInfo = response;
+    //   if(this.userInfo !== null)
+    //   this.editForm();
+    // })
   }
 
   createForm() {
@@ -41,16 +51,48 @@ export class CreateUpdateUserComponent implements OnInit {
   }
 
   editForm() {
+    this.profilePicture = this.userInfo.image
     this.userForm.patchValue({
       firstname : this.userInfo ? this.userInfo.firstname : null,
       lastname : this.userInfo ? this.userInfo.lastname : null,
       email : this.userInfo ? this.userInfo.email : null,
-      phone : this.userInfo ? this.userInfo.phone : null
+      phone : this.userInfo ? this.userInfo.phone : null,
+      image : this.userInfo ? this.userInfo.image : null,
     });
   }
 
   public checkError = (controlName: string, errorName: string) => {
     return this.userForm.controls[controlName].touched ? this.userForm.controls[controlName].hasError(errorName) : null;
+  }
+
+  selectFiles(event: any) {
+    this.selectedFiles = event.target.files;
+    const file: File = event.target.files[0];
+    if (
+      file.type == 'image/png' ||
+      file.type == 'image/jpeg' ||
+      file.type == 'image/x-png'
+    ) {
+      this.isValidImg = true;
+    } else {
+      this.isValidImg = false;
+    }
+
+    this.userService.updateProfile(this.selectedFiles).subscribe({
+      next: (res: any) => {
+        if (res.status !== "error") {
+          this.profilePicture = res.filename;
+          this.userForm.patchValue({
+            image : this.profilePicture
+          })
+        } else {
+          console.log(res);
+        }
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   onSubmit(){

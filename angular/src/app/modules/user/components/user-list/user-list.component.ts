@@ -25,13 +25,11 @@ export class UserListComponent implements OnInit {
   }
 
   updateUser(user : any){
-    this.userService.setUpdateUser(user)
-    this.router.navigate(['/user/updateUser']);
+    this.router.navigate(['/user/updateUser',user]);
   }
 
   viewUser(user : any){
-    this.userService.setViewUser(user);
-    this.router.navigate(['/user/viewUser']);
+    this.router.navigate(['/user/viewUser',user]);
   }
 
   deleteUser(id : any){

@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  $userData = new BehaviorSubject(null);
-  $userViewData = new BehaviorSubject(null);
+  $userData = new Subject();
   constructor(private http : HttpClient) { 
   }
 
@@ -36,7 +35,9 @@ export class UserService {
     this.$userData.next(userData);
   }
 
-  setViewUser(userViewData : any){
-    this.$userViewData.next(userViewData);
+  updateProfile(file: any) {
+    const formData = new FormData();
+    formData.append("profile-upload", file[0], file[0].name);
+    return this.http.post(`${environment.BASE_URL}/upload-profile`, formData);
   }
 }

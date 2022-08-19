@@ -1,6 +1,5 @@
 <div class="container">
     <h2 class="text-center mt-3">User List</h2>
-    
     <table class="table mt-5">
         <thead>
           <tr>
@@ -12,12 +11,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{{userInfo.firstname}}</td>
-            <td>{{userInfo.lastname}}</td>
-            <td>{{userInfo.email}}</td>
-            <td>{{userInfo.phone}}</td>
-            <td>{{userInfo.image}}</td>
+          <tr class="tableRow">
+            <td><span>{{userInfo.firstname}}</span></td>
+            <td><span>{{userInfo.lastname}}</span></td>
+            <td><span>{{userInfo.email}}</span></td>
+            <td><span>{{userInfo.phone}}</span></td>
+            <td><img src="{{image_path}}" *ngIf="image_path" width="100px" alt=""></td>
           </tr>
         </tbody>
       </table>

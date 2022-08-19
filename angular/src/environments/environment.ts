@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_URL : "http://localhost:5000/user"
+  BASE_URL : "http://localhost:5000/user",
+  IMG_PATH : "http://localhost:5000"
 };
 
 /*

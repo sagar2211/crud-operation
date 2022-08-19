@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use('/user', users);
+app.use("/image", express.static("public/upload_images"));
 
 // database connection
 mongoose.connect(process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopology: true })

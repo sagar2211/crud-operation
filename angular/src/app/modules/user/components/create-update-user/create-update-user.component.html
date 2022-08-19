@@ -27,9 +27,13 @@
             </div>
         
             <div class="form-group">
-                <label for="exampleInputEmail1">Photo</label>
-                <input type="file" class="form-control" formControlName="image">
-                <small class="form-text" *ngIf="userInfo?.image">{{userInfo?.image}}</small>
+              <button class="btn primary file-upload-button">
+                <input type="file" accept="image/png,image/jpeg,image/x-png" #fileInput
+                    (change)="selectFiles($event)">
+                <i class="fa fa-solid fa-pen"></i>
+              </button>
+              <img src="{{profilePicture}}" *ngIf="profilePicture" width="100%" alt="">
+              <small class="form-text" *ngIf="profilePicture">{{profilePicture}}</small>
               </div>
             <div class="d-flex justify-content-between mt-3">
                 <button class="btn btn-primary" routerLink="/user/userList">User List</button>
