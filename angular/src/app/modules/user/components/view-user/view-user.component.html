@@ -1,0 +1,27 @@
+<div class="container">
+    <h2 class="text-center mt-3">User List</h2>
+    
+    <table class="table mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Image Path</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{userInfo.firstname}}</td>
+            <td>{{userInfo.lastname}}</td>
+            <td>{{userInfo.email}}</td>
+            <td>{{userInfo.phone}}</td>
+            <td>{{userInfo.image}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary" routerLink="/user/userList">User List</button>
+    </div>
+</div>

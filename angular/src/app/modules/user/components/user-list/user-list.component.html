@@ -1,0 +1,33 @@
+<div class="container">
+    <h2 class="text-center mt-3">User List</h2>
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-success" routerLink="/user/createUser">Create New User</button>
+    </div>
+    <table class="table mt-5">
+        <thead>
+          <tr>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Image Path</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+            <th scope="col">View</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of userData">
+            <td>{{user.firstname}}</td>
+            <td>{{user.lastname}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.image}}</td>
+            <td><button class="btn btn-primary" (click)="updateUser(user)">Update</button></td>
+            <td><button class="btn btn-danger" (click)="deleteUser(user._id)">Delete</button></td>
+            <td><button class="btn btn-danger" (click)="viewUser(user)">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<app-toast *ngIf="toastObj !==null" [toastObj]="toastObj"></app-toast>
